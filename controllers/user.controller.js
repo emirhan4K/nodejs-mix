@@ -3,7 +3,7 @@ const userService = require("../services/user.services");
 class UserController {
   async register(req, res) {
     try {
-      const user = await authService.registerUser(req.body);
+      const user = await userService.registerUser(req.body);
       res.status(201).json({ message: "Başarıyla kayıt olundu.", user });
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -13,7 +13,7 @@ class UserController {
   async login(req, res) {
     try {
       const { email, password } = req.body;
-      const user = await authService.loginUser(email, password);
+      const user = await userService.loginUser(email, password);
       res.status(200).json({ message: "Giriş başarılı.", userId: user._id });
     } catch (error) {
       res.status(401).json({ error: error.message });
@@ -22,10 +22,12 @@ class UserController {
 
   async forgotPassword(req, res) {
     try {
-      const token = await authService.createPasswordResetToken(req.body.email);
+      const token = await userService.createPasswordResetToken(req.body.email);
       res.status(200).json({ message: "Sıfırlama linki gönderildi.", token });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
   }
 }
+
+module.exports = new UserController();

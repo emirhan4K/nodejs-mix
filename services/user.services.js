@@ -34,5 +34,16 @@ class UserService {
 
     return { resetToken, token };
   }
+
+  async forgotPassword(email) {
+    const user = await userRepository.findByEmail(email);
+    if (!user) throw new Error("Kullanıcı bulunamadı.");
+    const token = crypto.randomBytes(20).toString("hex");
+    await userRepository.updateById(user._id, {
+      resetPasswordToken: token,
+      resetPasswordExpires: Date.now() + 900000,
+    });
+    return token;
+  }
 }
 module.exports = new UserService();
