@@ -1,4 +1,10 @@
 {
+  "name": "auth-js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "express": "^5.2.1",
