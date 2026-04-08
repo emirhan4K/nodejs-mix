@@ -1,19 +1,22 @@
-const express = require("express");
-const path = require("path");
 const dotenv = require("dotenv");
-const connectDB = require("./config/db");
-const adminKontrol = require("./middleware/adminKontrol");
-import bcrypt from "bcrypt";
-
 dotenv.config();
 
+const express = require("express");
+const connectDB = require("./config/db"); 
+const authRoutes = require("./routes/auth.routes");
+const noteRoutes = require("./routes/note.routes");
+
+
 const app = express();
+
 connectDB();
 
 app.use(express.json());
 
+app.use("/api/auth", authRoutes); 
+app.use("/api", noteRoutes);     
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Sunucu ${PORT} portunda başlatıldı..`);
+  console.log(`🚀 Sunucu ${PORT} portunda başarıyla başlatıldı!`);
 });
