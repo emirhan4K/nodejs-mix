@@ -14,7 +14,7 @@ class CategoryController {
   async categoryleriGetir(req, res) {
     try {
       const response = await categoryService.categoryleriGetir();
-      res.status(201).json(response);
+      res.status(200).json(response);
     } catch (error) {
       res.status(400).json({ message: error.message });
     }
