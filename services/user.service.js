@@ -14,7 +14,7 @@ class UserService {
       email,
       hashedPassword,
     );
-    return { message: "Kullanıcı başarıyla oluşturuldu.", newUser };
+    return { message: "Kullanıcı başarıyla oluşturuldu.", user: newUser };
   }
 
     async login(email, password) {
@@ -22,7 +22,14 @@ class UserService {
         if (!user) {
             throw new Error("Kullanıcı bulunamadı.");
         }
-        
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            throw new Error("Geçersiz şifre.");
+        }
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+            expiresIn: "1h",
+        });
+        return { message: "Giriş başarılı.", token };
     }
-
 }
+module.exports = new UserService();
