@@ -19,4 +19,6 @@ const jwtKontrol = (req, res, next) => {
   }
 };
 
+
+
 module.exports = jwtKontrol;
