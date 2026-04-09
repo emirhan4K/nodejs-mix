@@ -3,6 +3,9 @@ const productService = require("../services/product.service");
 class ProductController {
   async productAdd(req, res) {
     const productAdd  = req.body;
+    if (req.file) {
+        productAdd.imageUrl = req.file.filename;
+    }
     try {
       const response = await productService.productAdd(productAdd);
       res.status(201).json(response);
