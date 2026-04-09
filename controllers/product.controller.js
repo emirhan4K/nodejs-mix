@@ -2,12 +2,12 @@ const productService = require("../services/product.service");
 
 class ProductController {
   async productAdd(req, res) {
-    const productAdd  = req.body;
+    const productData  = req.body;
     if (req.file) {
-        productAdd.imageUrl = req.file.filename;
+        productData.imageUrl = req.file.filename;
     }
     try {
-      const response = await productService.productAdd(productAdd);
+      const response = await productService.productAdd(productData);
       res.status(201).json(response);
     } catch (error) {
       res.status(400).json({ message: error.message });
