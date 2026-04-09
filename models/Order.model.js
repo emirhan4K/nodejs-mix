@@ -8,7 +8,8 @@ const orderSchema = new mongoose.Schema({
   items: [
     {
       urunId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
       },
       quantity: {
         type: Number,
