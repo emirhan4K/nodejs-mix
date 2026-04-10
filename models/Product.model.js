@@ -14,6 +14,10 @@ const productSchema = new mongoose.Schema({
     required: true,
     min: 0,
   },
+  slug:{
+    type:String,
+    unique:true
+  },
   imageUrl: {
     type: String,
     required: true,

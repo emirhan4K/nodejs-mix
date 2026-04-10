@@ -22,6 +22,17 @@ class ProductController {
       res.status(400).json({ message: error.message });
     }
   }
+
+  async slugaGoreGetir(req,res){
+    const slug = req.params.slug;
+    try {
+        const response = await productService.slugIleBul(slug);
+        res.status(200).json(response)
+    } catch (error) {
+        res.status(400).json({message: error.message});
+    } 
+  }
+
 }
 
 module.exports = new ProductController();

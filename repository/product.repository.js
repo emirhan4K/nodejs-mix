@@ -15,6 +15,11 @@ class ProductRepository{
         const id = await Product.findById(productId);
         return id;
     }
+
+    async slugIleBul(slug){
+        const slugs = await Product.findOne({slug});
+        return slugs;
+    }
 }
 
 module.exports = new ProductRepository();
